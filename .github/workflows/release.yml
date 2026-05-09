@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # OIDC Trusted Publishing — no API token needed
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
+      - name: Set up Python 3.13
+        run: uv python install 3.13
+
+      - name: Build wheel + sdist
+        run: uv build
+
+      - name: Verify wheel installs cleanly (smoke)
+        run: |
+          uv venv /tmp/smoke-venv --python 3.13
+          uv pip install --python /tmp/smoke-venv/bin/python --force-reinstall dist/*.whl
+          /tmp/smoke-venv/bin/python -c "import wifi_diag_narrator; print(wifi_diag_narrator.__version__)"
+
+      - name: Publish to PyPI (Trusted Publisher OIDC)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # No `with: password:` — Trusted Publisher resolves via OIDC.
+        # Requires PyPI Trusted Publisher registration:
+        # https://docs.pypi.org/trusted-publishers/

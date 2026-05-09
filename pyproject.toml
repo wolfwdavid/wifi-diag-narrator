@@ -1,0 +1,70 @@
+[project]
+name = "wifi-diag-narrator"
+version = "0.1.0"
+description = "Templated + LLM narrator for AI Internet Diagnostic — citation guardrail + structured outputs."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.13"
+authors = [{ name = "WolfDavid", email = "mkarurosun@gmail.com" }]
+keywords = ["wifi", "diagnostic", "narrator", "anthropic", "citation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: System :: Networking :: Monitoring",
+    "Typing :: Typed",
+]
+dependencies = [
+    "wifi-diag-schema>=1.1.0,<2.0.0",
+    "pydantic>=2.13,<3.0",
+    "tenacity>=9.0,<10.0",
+    # NOTE: anthropic is an optional extra (Pitfall C: lazy-import in
+    # anthropic_narrator). Phase 4 agent local-only mode pins this WITHOUT
+    # the [llm] extra.
+]
+
+[project.optional-dependencies]
+llm = [
+    "anthropic>=0.97,<1.0",
+]
+dev = [
+    "ruff>=0.7",
+    "mypy>=1.13",
+    "pytest>=8.0",
+    "anthropic>=0.97,<1.0",            # tests need it for exception types
+]
+
+[project.urls]
+Homepage = "https://github.com/wolfwdavid/wifi-diag-narrator"
+Repository = "https://github.com/wolfwdavid/wifi-diag-narrator"
+Issues = "https://github.com/wolfwdavid/wifi-diag-narrator/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wifi_diag_narrator"]
+
+[tool.uv.sources]
+# Local dev: resolve schema from sibling repo (CI swaps to PyPI release).
+wifi-diag-schema = { path = "../wifi-diag-schema", editable = true }
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "W"]
+ignore = []
+
+[tool.mypy]
+python_version = "3.13"
+ignore_missing_imports = true
