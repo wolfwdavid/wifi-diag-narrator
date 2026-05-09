@@ -4,6 +4,7 @@ The schema-allowlist test enforces that every path in EVIDENCE_RULES is a real
 TelemetryFrame field — future schema major bumps that drop a field will fail
 this test instead of silently breaking the LLM narrator's citations.
 """
+
 from __future__ import annotations
 
 from typing import get_args

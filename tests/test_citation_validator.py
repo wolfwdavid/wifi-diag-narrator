@@ -1,4 +1,5 @@
 """Tests for the citation validator (D-NARRATOR-01/02, LLM-03)."""
+
 from __future__ import annotations
 
 from wifi_diag_schema.verdict import EvidenceItem, Verdict
@@ -23,9 +24,7 @@ _F2 = {
 
 def test_known_path_passes():
     """A real TelemetryFrame field with non-null value in the window is valid."""
-    assert is_valid_citation(
-        EvidenceItem(telemetry_path="rssi_dbm", claim="x"), [_F1, _F2]
-    )
+    assert is_valid_citation(EvidenceItem(telemetry_path="rssi_dbm", claim="x"), [_F1, _F2])
 
 
 def test_unknown_path_rejected():
