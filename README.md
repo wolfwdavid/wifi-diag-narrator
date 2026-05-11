@@ -1,5 +1,27 @@
 # wifi-diag-narrator
 
+Templated + Anthropic Haiku 4.5 narrator package for the [AI Internet Diagnostic](https://huggingface.co/WolfDavid/ai-internet-diagnostic-model) project.
+
+> **Supporting infrastructure.** This package supplies the LLM-narrator + citation-validation guardrail used by the Space and the agent. For results-first numbers, architecture, and live demo, see the [Model repo README](https://huggingface.co/WolfDavid/ai-internet-diagnostic-model#results).
+
+## Install
+
+```bash
+pip install wifi-diag-narrator
+```
+
+## Public API
+
+- `narrate(verdict, telemetry, frames)` — Anthropic Structured Outputs narrator
+- `narrate_templated(verdict)` — LLM-free templated narrator (used by agent local-only mode)
+- `strip_invalid_citations(narration)` — citation-guardrail enforcer
+
+See the [Model repo](https://huggingface.co/WolfDavid/ai-internet-diagnostic-model) for the architecture diagram and full pipeline context.
+
+---
+
+# wifi-diag-narrator
+
 Narrator + citation guardrail for [AI Internet Diagnostic](https://github.com/WolfDavid/ai_internet_diagnostic).
 
 Two narrators with the same `Verdict` output shape:
