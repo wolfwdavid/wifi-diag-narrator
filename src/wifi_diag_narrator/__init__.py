@@ -26,7 +26,7 @@ from .citation_validator import is_valid_citation, strip_invalid_citations
 from .evidence_rules import EVIDENCE_RULES
 from .templated import narrate_templated
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "EVIDENCE_RULES",

@@ -1,6 +1,6 @@
 [project]
 name = "wifi-diag-narrator"
-version = "0.1.0"
+version = "0.1.1"
 description = "Templated + LLM narrator for AI Internet Diagnostic — citation guardrail + structured outputs."
 readme = "README.md"
 license = { text = "Apache-2.0" }
