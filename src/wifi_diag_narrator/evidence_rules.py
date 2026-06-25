@@ -68,4 +68,12 @@ EVIDENCE_RULES: dict[DisconnectClass, list[str]] = {
         "ping_continuity.avg_rtt_ms",
         "dns_resolution_ms",
     ],
+    # OOD abstention sentinel (schema 1.2.0 / SCHEMA-01): no confident
+    # attribution, so cite the broadest always-relevant health signals to
+    # give the user/IT material to work from.
+    "unknown": [
+        "rssi_dbm",
+        "ping_continuity.packet_loss_pct",
+        "ping_continuity.avg_rtt_ms",
+    ],
 }

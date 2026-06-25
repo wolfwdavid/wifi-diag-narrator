@@ -39,6 +39,7 @@ _HEADLINES: dict[DisconnectClass, str] = {
     "driver_power_save_wake": "Your Wi-Fi driver didn't fully wake up after sleep.",
     "rf_sticky_client": "Your laptop is stuck on a weak access point.",
     "isp_upstream_fail": "Wi-Fi works locally, but the internet upstream is down.",
+    "unknown": "We couldn't confidently pinpoint the cause from the signals seen during {context}.",
 }
 
 # Suggested fixes: actionable, IT-ticket-ready, no auto-action verbs.
@@ -71,6 +72,10 @@ _SUGGESTED_FIXES: dict[DisconnectClass, str] = {
     "isp_upstream_fail": (
         "The Wi-Fi network is fine — the issue is upstream. Try a hotspot or "
         "contact the network admin."
+    ),
+    "unknown": (
+        "Capture a fresh diagnostic during the next disconnect, or share this "
+        "report with IT — the current signals are inconclusive."
     ),
 }
 
