@@ -47,9 +47,9 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/wifi_diag_narrator"]
 
-[tool.uv.sources]
-# Local dev: resolve schema from sibling repo (CI swaps to PyPI release).
-wifi-diag-schema = { path = "../wifi-diag-schema", editable = true }
+# Sibling-path editable override for wifi-diag-schema was stripped once the
+# schema reached PyPI (>=1.2,<2.0). uv resolves it as an ordinary wheel; no
+# sibling checkout is required for local dev or CI.
 
 [tool.pytest.ini_options]
 minversion = "8.0"
