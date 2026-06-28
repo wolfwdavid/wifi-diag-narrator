@@ -9,6 +9,7 @@ Also guards Pitfall C: importing ``narrate`` from the top-level
 package MUST NOT eagerly import ``anthropic`` (lazy import lives
 inside ``narrate()`` itself).
 """
+
 from __future__ import annotations
 
 import subprocess
@@ -34,9 +35,7 @@ def test_public_api_re_exports() -> None:
     )
     assert callable(narrate), "narrate must be callable"
     assert callable(narrate_templated), "narrate_templated must be callable"
-    assert callable(strip_invalid_citations), (
-        "strip_invalid_citations must be callable"
-    )
+    assert callable(strip_invalid_citations), "strip_invalid_citations must be callable"
 
     # 3. Names listed in __all__ (so `from wifi_diag_narrator import *`
     #    and ``help(wifi_diag_narrator)`` discover them).
@@ -47,8 +46,7 @@ def test_public_api_re_exports() -> None:
         "strip_invalid_citations",
     ):
         assert name in wifi_diag_narrator.__all__, (
-            f"{name!r} missing from wifi_diag_narrator.__all__: "
-            f"{wifi_diag_narrator.__all__!r}"
+            f"{name!r} missing from wifi_diag_narrator.__all__: {wifi_diag_narrator.__all__!r}"
         )
 
 
